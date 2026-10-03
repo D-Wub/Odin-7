@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOL | Club Admin</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+</head>
+<body>
+    <div class="content-container">
+        <div class="btn-background"></div>
+        <a href="/"><button class="home-btn" title="Home"></button></a>
+        
+        <form class="form-layout" action="/admin-sign-up" method="POST">
+            <label class="form-label">
+                <p>Administration Password Required:</p>
+                <input class="form-input" name="adminPassword" type="password" placeholder="admin password">
+            </label>
+            <% errors.forEach(error => { %>
+                <p class="error"><%= error.msg %></p>
+            <% }) %>
+        </form>
+    </div>
+</body>
+</html>

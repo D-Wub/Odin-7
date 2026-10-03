@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOL | Login</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+</head>
+<body>
+    <div class="content-container">
+        <div class="btn-background"></div>
+        <a href="/"><button class="home-btn" title="Home"></button></a>          
+
+        <form class="form-layout" action="/login" method="POST">
+            <label class="form-label">
+                <p>Please Login Clubmate!</p>
+                <br>
+                <br>
+                <p>Username</p>
+                <input class="form-input" name="username" type="text" placeholder="username" value="<%= formData?.username || '' %>">
+            </label>
+            <label class="form-label">
+                <p>Password</p>
+                <input class="form-input" name="password" type="password" placeholder="password">
+            </label>
+            <% if (error) { %>
+                <p class="error"><%= error %></p>
+            <% } %>
+            <button type="submit" class="submit-btn">SUBMIT</button>
+        </form>
+        <a class="refer-sign-up" href="/sign-up">No account? Sign up here</a>
+    </div>
+</body>
+</html>

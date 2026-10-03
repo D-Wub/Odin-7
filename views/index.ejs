@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memberz-Own-Lee</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+</head>
+<body>
+    <main class="index-main">
+        <div class="marquee-text fadeout-horizontal">
+            <div class="marquee-text-track">
+                <h1>Memberz-Own-Lee</h1>
+                <h1 aria-hidden="true">Memberz-Own-Lee</h1>
+                <h1 aria-hidden="true">Memberz-Own-Lee</h1>
+                <h1 aria-hidden="true">Memberz-Own-Lee</h1>
+                <h1 aria-hidden="true">Memberz-Own-Lee</h1>
+                <h1 aria-hidden="true">Memberz-Own-Lee</h1>
+                <h1 aria-hidden="true">Memberz-Own-Lee</h1>
+                <h1 aria-hidden="true">Memberz-Own-Lee</h1>
+                <h1 aria-hidden="true">Memberz-Own-Lee</h1>
+                <h1 aria-hidden="true">Memberz-Own-Lee</h1>
+                <h1 aria-hidden="true">Memberz-Own-Lee</h1>
+                <h1 aria-hidden="true">Memberz-Own-Lee</h1>
+            </div>
+        </div>
+        <a href="/create"><button class="create-button" title="Create Message">+</button></a>
+        <div class="button-grid">
+            <% if (locals.user && !user.member) { %>
+                <div class="glitch-div">
+                    Become a <a href="/member-sign-up"><button class="glitch-button" id="hover-member"><span>vip</span></button></a>...
+                </div>
+                <div class="glitch-div">
+                    Might as well <a href="/admin-sign-up"><button class="glitch-button" id="hover-admin"><span>own the club</span></button></a>
+                    <% if (alerts.member) { %>
+                        <p class="error"><%= alerts.member %></p>
+                    <% } %>
+                </div>
+                <div class="glitch-div">
+                    <a href="/logout"><button class="glitch-button" id="hover-logout">Log Out</button></a>
+                </div>
+            <% } else if (locals.user && !user.admin) { %>
+                <div class="glitch-div">
+                    Might as well <a href="/admin-sign-up"><button class="glitch-button" id="hover-admin"><span>own the club</span></button></a>
+                </div>
+                <div class="glitch-div">
+                    <a href="/logout"><button class="glitch-button" id="hover-logout">Log Out</button></a>
+                </div>
+            <% } else if (locals.user && user.admin) { %>
+                <h1>&lt; Welcome Manager <%= user.username %> &gt;</h1>
+                <div class="glitch-div">
+                    <a href="/logout"><button class="glitch-button" id="hover-logout">Log Out</button></a>
+                </div>
+            <% } else { %>
+                <div class="glitch-div">
+                Want In? <a href="/sign-up"><button class="glitch-button" id="hover-sign"><span>Sign up</span></button></a>
+                </div>
+                <div class="glitch-div">
+                    Already part of MOL? <a href="/login"><button class="glitch-button" id="hover-login"><span>Login</span></button></a>
+                </div>
+                <div class="glitch-div">
+                    Become a <a href="/member-sign-up"><button class="glitch-button" id="hover-member"><span>vip</span></button></a>...
+                </div>
+                <div class="glitch-div">
+                    Might as well <a href="/admin-sign-up"><button class="glitch-button" id="hover-admin"><span>own the club</span></button></a>
+                    <% if (alerts.member) { %>
+                        <p class="error"><%= alerts.member %></p>
+                    <% } %>
+                </div>
+            <% } %>
+        </div>
+        <div class="message-container">
+            <% messages.forEach(message => { %>
+                <% if (user?.member) { %>
+                    <p><%= message.username %> | <%= message.first_name %> <%= message.last_name %></p>
+                    <p class="message-title"><%= message.title %></p>
+                    <p class="message-content"><%= message.content %></p>
+                    <p class="message-date"><%= message.formattedDate %></p>
+                <% } else { %>
+                    <p><%= message.username %></p>
+                    <p class="message-title"><%= message.title %></p>
+                    <p class="message-content"><%= message.content %></p>
+                <% } %>
+                <% if (user?.admin) { %>
+                    <form class="delete-form" action="/delete" method="POST">
+                        <input type="hidden" name="message_id" value="<%= message.message_id %>">
+                        <button type="submit" id="delete-button" class="delete-text">Delete Post</button>
+                    </form>
+                <% } %>
+                <div class="message-div"></div>
+            <% }) %>
+        </div>
+        <div id="confirmModal" class="modal-overlay">
+            <div class="modal-card">
+                <h3>Delete this post?</h3>
+                <p>This action cannot be undone.</p>
+                <div class="modal-actions">
+                <button id="cancelBtn" class="btn btn-secondary">Cancel</button>
+                <button id="confirmBtn" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </main>
+<script src="/scripts/deleteModal.js"></script>
+<script src="/scripts/hoverGlitch.js"></script>
+</body>
+</html>

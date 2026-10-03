@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOL | Sign Up</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+</head>
+<body>
+    <div class="content-container">
+        <div class="btn-background"></div>
+        <a href="/"><button class="home-btn" title="Home"></button></a>          
+
+        <form class="form-layout" action="/sign-up" method="POST">
+            <label class="form-label">
+                <p>Username</p>
+                <input 
+                    class="form-input" 
+                    name="username" 
+                    type="text" 
+                    placeholder="enter username" 
+                    required 
+                    minlength="3" 
+                    maxlength="30" 
+                    value="<%= formData?.username || '' %>">
+            </label>
+            <label class="form-label">
+                <p>Password</p>
+                <input class="form-input" name="password" type="password" placeholder="enter password" required minlength="8">
+            </label>
+            <label class="form-label">
+                <p>Confirm Password</p>
+                <input class="form-input" name="confirm_password" type="password" placeholder="re-enter password" required minlength="8">
+            </label>
+            <label class="form-label">
+                <p>First Name</p>
+                <input class="form-input" name="first_name" type="text" placeholder="first name" required>
+            </label>
+            <label class="form-label">
+                <p>Last Name</p>
+                <input class="form-input" name="last_name" type="text" placeholder="last name" required>
+            </label>
+            <% errors.forEach(error => { %>
+                <p class="error"><%= error.msg %></p>
+            <% }) %>
+            <button type="submit" class="submit-btn">SUBMIT</button>
+        </form>
+    </div>
+</body>
+</html>

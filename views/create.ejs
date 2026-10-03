@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOL | Create</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+</head>
+<body>
+    <div class="content-container">
+        <div class="btn-background"></div>
+        <a href="/"><button class="home-btn" title="Home"></button></a>          
+        <h1 class="h1-create">Composing MOL Message</h1>
+        <form class="form-layout" action="/create" method="POST">
+            <label class="form-label">
+                <h2 class="h2-create">Title</h2>
+                <input 
+                    class="form-input" 
+                    name="title" 
+                    type="text" 
+                    placeholder="enter title" 
+                    required 
+                    minlength="3" 
+                    maxlength="50" 
+                    value="<%= formData?.title || '' %>">
+            </label>
+            <label class="form-label">
+                <h2 class="h2-create">Content</h2>
+                <textarea 
+                    rows="10" 
+                    class="form-input" 
+                    name="content" 
+                    type="text" 
+                    placeholder="message body" 
+                    maxlength="3000" 
+                    required
+                    ><%= formData?.content || '' %></textarea>
+            </label>
+            <% errors.forEach(error => { %>
+                <p class="error"><%= error.msg %></p>
+            <% }) %>
+            <button type="submit" class="submit-btn">POST</button>
+        </form>
+    </div>
+</body>
+</html>
